@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Wdssean</title>
+  
+  <subtitle>我是蒟蒻，我太菜了</subtitle>
+  <link href="http://wdssean.gitee.io/atom.xml" rel="self"/>
+  
+  <link href="http://wdssean.gitee.io/"/>
+  <updated>2021-03-02T13:56:40.811Z</updated>
+  <id>http://wdssean.gitee.io/</id>
+  
+  <author>
+    <name>Wdssean</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GoDB开发踩坑记</title>
+    <link href="http://wdssean.gitee.io/2021/03/02/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0/"/>
+    <id>http://wdssean.gitee.io/2021/03/02/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0/</id>
+    <published>2021-03-02T12:00:51.000Z</published>
+    <updated>2021-03-02T13:56:40.811Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1><p>前几天因为<code>leancloud</code>网速太慢所以自己写了一个go语言数据库，想部署到我的树莓派上。</p><span id="more"></span><h1 id="正文"><a class="markdownIt-Anchor" href="#正文"></a> 正文</h1><p>我在写的时候发现了一些神奇的操作。</p><h2 id="golang"><a class="markdownIt-Anchor" href="#golang"></a> golang</h2><h3 id="把js变量的表达方式字符串转换成go变量"><a class="markdownIt-Anchor" href="#把js变量的表达方式字符串转换成go变量"></a> 把js变量的表达方式字符串转换成go变量</h3><p>可以先把它嵌入到一个json字符串中，再用<code>encoding/json</code>里的函数把它转换成<code>map[string]interface&#123;&#125;</code>类型，再取出数据。伪代码:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;js to go</span><br><span class="line">tmp&#x3D;&quot;&#123;\&quot;data\&quot;:&quot;+js+&quot;&#125;&quot;;</span><br><span class="line">tmp1&#x3D;decode_json(tmp);</span><br><span class="line">&#x2F;&#x2F;decode_json是把json字符串转换为map,这个网上查一下就可以了</span><br><span class="line">go&#x3D;tmp1[&quot;data&quot;];</span><br></pre></td></tr></table></figure><h3 id="把go变量转换成js表达方法的字符串"><a class="markdownIt-Anchor" href="#把go变量转换成js表达方法的字符串"></a> 把go变量转换成js表达方法的字符串</h3><p>可以先把变量放到一个<code>map</code>里，再转换成json字符串，最后在截取其中一段作为结果。伪代码：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;go to js</span><br><span class="line">tmp[&quot;data&quot;]&#x3D;data;</span><br><span class="line">tmp1&#x3D;encode_json(data)</span><br><span class="line">&#x2F;&#x2F;encode_json是把map转成json字符串的函数,这个网上查一下就可以了</span><br><span class="line">&#x2F;&#x2F;tmp1&#x3D;&quot;&#123;\&quot;data\&quot;:js表达式&#125;&quot;</span><br><span class="line">js&#x3D;tmp1[8,len(tmp1)-1];</span><br></pre></td></tr></table></figure><h3 id="格式化json字符串"><a class="markdownIt-Anchor" href="#格式化json字符串"></a> 格式化json字符串</h3><h4 id="方法一"><a class="markdownIt-Anchor" href="#方法一"></a> 方法一</h4><p>可以先调用一下<code>js to go</code>再调用一下<code>go to js</code>就好了</p><h4 id="方法二"><a class="markdownIt-Anchor" href="#方法二"></a> 方法二</h4><p>或者先调用<code>decode_json</code>再调用<code>encode_json</code></p><h4 id="两种方法的区别"><a class="markdownIt-Anchor" href="#两种方法的区别"></a> 两种方法的区别</h4><p>第一种能格式化js变量表达式，而第二种只能格式化object或者json</p><h2 id="javascript"><a class="markdownIt-Anchor" href="#javascript"></a> javascript</h2><p>把js变量转换成相应表达方法的字符串思路和<code>把go变量转换成js表达方法的字符串</code>一样，只要用<code>JSON.stringify</code>和<code>substring</code>就可以了，伪代码就不再写了</p><h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1><p>终于写完了，我把代码放到<a href="https://gitee.com/wdssean/godb">gitee</a>上了。有兴趣的可以看一下<a href="https://gitee.com/wdssean/godb">代码</a></p>]]></content>
+    
+    
+    <summary type="html">&lt;h1 id=&quot;前言&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#前言&quot;&gt;&lt;/a&gt; 前言&lt;/h1&gt;
+&lt;p&gt;前几天因为&lt;code&gt;leancloud&lt;/code&gt;网速太慢所以自己写了一个go语言数据库，想部署到我的树莓派上。&lt;/p&gt;</summary>
+    
+    
+    
+    
+  </entry>
+  
+</feed>
