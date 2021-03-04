@@ -5542,12 +5542,11 @@ pre,
 }
 
 code {
-  text-shadow: 0 1px #fff;
   padding: 0.2em 0.4em;
   margin: 0 0.3em;
-  color: #555;
-  background: #eee;
-  border-radius: 3px;
+  color: #1e1e1e;
+  background: #f7f7f7;
+  border-radius: 0px;
   font-size: 85%;
 }
 
