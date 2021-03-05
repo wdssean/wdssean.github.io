@@ -17,18 +17,22 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>404 Not Found：该页无法显示 | Wdssean</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="404 Not Found：该页无法显示">
-<meta property="og:url" content="http://wdssean.gitee.io/404.html">
+  <title>GoDB开发踩坑记(补充) | Wdssean</title>
+  <meta name="description" content="前言 之前写了一篇GoDB开发踩坑记但是内容有些不全，所以来补充一下。所以没看过GoDB开发踩坑记的可以先看一下那篇文章。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GoDB开发踩坑记(补充)">
+<meta property="og:url" content="http://wdssean.gitee.io/2021/03/05/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0-%E8%A1%A5%E5%85%85/index.html">
 <meta property="og:site_name" content="Wdssean&#39;s Blog">
+<meta property="og:description" content="前言 之前写了一篇GoDB开发踩坑记但是内容有些不全，所以来补充一下。所以没看过GoDB开发踩坑记的可以先看一下那篇文章。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-03-02T13:24:59.063Z">
-<meta property="article:modified_time" content="2021-03-02T13:24:59.063Z">
+<meta property="article:published_time" content="2021-03-05T14:05:07.000Z">
+<meta property="article:modified_time" content="2021-03-05T14:33:55.104Z">
 <meta property="article:author" content="Wdssean">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="golang">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://wdssean.gitee.io/404.html">
+  <link rel="canonical" href="http://wdssean.gitee.io/2021/03/05/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0-%E8%A1%A5%E5%85%85/index.html">
   
     <link rel="alternate" href="/atom.xml" title="Wdssean&#39;s Blog" type="application/atom+xml">
   
@@ -276,14 +280,14 @@
   
 <main class="main" role="main">
   <div class="content">
-  <article id="page-" class="article article-type-page" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-GoDB开发踩坑记-补充" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      404 Not Found：该页无法显示
+      GoDB开发踩坑记(补充)
     </h1>
   
 
@@ -291,22 +295,58 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/404.html" class="article-date">
-	  <time datetime="2021-03-02T13:24:59.063Z" itemprop="datePublished">2021-03-02</time>
+	<a href="/2021/03/05/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0-%E8%A1%A5%E5%85%85/" class="article-date">
+	  <time datetime="2021-03-05T14:05:07.000Z" itemprop="datePublished">2021-03-05</time>
 	</a>
 </span>
         
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a>
+  </span>
+
         
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/golang/" rel="tag">golang</a>, <a class="article-tag-link-link" href="/tags/javascript/" rel="tag">javascript</a>
+  </span>
+
 
         
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/404.html#comments" class="article-comment-link">评论</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/05/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0-%E8%A1%A5%E5%85%85/#comments" class="article-comment-link">评论</a></span>
         
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <script type="text/javascript" src="//www.qq.com/404/search_children.js" charset="utf-8" homePageUrl="<%- config.url %>" homePageName="回到我的主页"></script>
+        <h1 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h1>
+<p>之前写了一篇<code>GoDB开发踩坑记</code>但是内容有些不全，所以来补充一下。所以没看过<code>GoDB开发踩坑记</code>的可以先看一下那篇文章。</p>
+<span id="more"></span>
+<h1 id="正文"><a class="markdownIt-Anchor" href="#正文"></a> 正文</h1>
+<h2 id="golang"><a class="markdownIt-Anchor" href="#golang"></a> golang</h2>
+<h3 id="encode_josn把mapstringinterface转换为json字符串"><a class="markdownIt-Anchor" href="#encode_josn把mapstringinterface转换为json字符串"></a> encode_josn——把<code>map[string]interface&#123;&#125;</code>转换为json字符串</h3>
+<p>这里用到了<code>encoding/json</code>包（请自行引入）中的<code>json.Marshal</code>函数，代码如下：</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">encode_json</span><span class="params">(data <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><span class="params">(<span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line">	js,_:=json.Marshal(data);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">string</span>(js);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="decode_json把json字符串转换为mapstringinterface"><a class="markdownIt-Anchor" href="#decode_json把json字符串转换为mapstringinterface"></a> decode_json——把json字符串转换为<code>map[string]interface&#123;&#125;</code></h3>
+<p>这里用的也是<code>encoding/json</code>这个包，但用的是<code>json.Unmarshal</code>函数，代码如下</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">json_decode</span><span class="params">(str <span class="keyword">string</span>)</span><span class="params">(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line">	data:=<span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;);</span><br><span class="line">	json.Unmarshal([]<span class="keyword">byte</span>(str),&amp;data);</span><br><span class="line">	<span class="keyword">return</span> data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="js_to_govar把js变量表达式字符串转换成go语言变量"><a class="markdownIt-Anchor" href="#js_to_govar把js变量表达式字符串转换成go语言变量"></a> js_to_govar——把js变量表达式字符串转换成go语言变量</h3>
+<p>用到了<code>json_decode</code>函数(上面写的)，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">js_to_govar</span><span class="params">(str <span class="keyword">string</span>)</span><span class="params">(<span class="keyword">interface</span>&#123;&#125;)</span></span>&#123;</span><br><span class="line">	str=fmt.Sprintf(<span class="string">&quot;&#123;\&quot;data\&quot;:%v&#125;&quot;</span>,str);</span><br><span class="line">	js:=Decode(str);</span><br><span class="line">	<span class="keyword">return</span> js[<span class="string">&quot;data&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="govar_to_js把go语言变量转换成js变量表达式"><a class="markdownIt-Anchor" href="#govar_to_js把go语言变量转换成js变量表达式"></a> govar_to_js——把go语言变量转换成js变量表达式</h3>
+<p>用到了<code>json_encode</code>函数(上面写的，<s><strong><em>方法比较猥琐</em></strong></s>)，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">govar_to_js</span><span class="params">(data <span class="keyword">interface</span>&#123;&#125;)</span><span class="params">(<span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line">	js:=<span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;);</span><br><span class="line">	js[<span class="string">&quot;data&quot;</span>]=data;</span><br><span class="line">	str:=Encode(js);</span><br><span class="line">	<span class="keyword">return</span> str[<span class="number">8</span>:<span class="built_in">len</span>(str)<span class="number">-1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><s>这方法够猥琐吧(:</s></p>
+<h3 id="js_format格式化js变量表达式字符串"><a class="markdownIt-Anchor" href="#js_format格式化js变量表达式字符串"></a> js_format——格式化js变量表达式字符串</h3>
+<p>这里使用了<code>govar_to_js</code>以及<code>js_to_govar</code>函数(都是上面有的)，代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">js_format</span><span class="params">(str <span class="keyword">string</span>)</span><span class="params">(<span class="keyword">string</span>)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> govar_to_js(js_to_govar(str));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="javascript"><a class="markdownIt-Anchor" href="#javascript"></a> javascript</h2>
+<h3 id="tostr把js变量转换为js变量表达式的字符串"><a class="markdownIt-Anchor" href="#tostr把js变量转换为js变量表达式的字符串"></a> toStr——把js变量转换为js变量表达式的字符串</h3>
+<p>这个方法和<code>govar_to_js</code>一样<s>猥琐</s>，但是很实用，用了<code>JSON.stringify</code>函数(这个是自带的，不用导入任何包)，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toStr</span>(<span class="params">v</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data=&#123;&#125;;</span><br><span class="line">    data[<span class="string">&quot;v&quot;</span>]=v;</span><br><span class="line">    <span class="keyword">var</span> str=<span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">    <span class="built_in">console</span>.log(str)</span><br><span class="line">    <span class="keyword">return</span> str.substring(<span class="number">5</span>,str.length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h1>
+<p>大家有什么意见和建议可以写在评论区内。</p>
 
       
     </div>
@@ -316,7 +356,7 @@
     
     <li class="post-copyright-link hidden-xs" style="word-break: break-all;">
       <strong>本文链接：</strong>
-      <a href="http://wdssean.gitee.io/404.html" title="404 Not Found：该页无法显示" target="_blank" rel="external">http://wdssean.gitee.io/404.html</a>
+      <a href="http://wdssean.gitee.io/2021/03/05/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0-%E8%A1%A5%E5%85%85/" title="GoDB开发踩坑记(补充)" target="_blank" rel="external">http://wdssean.gitee.io/2021/03/05/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0-%E8%A1%A5%E5%85%85/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -347,12 +387,28 @@
   </article>
   
     
+  <section id="comments">
+  	
+      <div id="vcomments"></div>
+    
+  </section>
+
 
   
 </div>
 
   <nav class="bar bar-footer clearfix" data-stick-bottom>
   <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/03/02/GoDB%E5%BC%80%E5%8F%91%E8%B8%A9%E5%9D%91%E8%AE%B0/" title="GoDB开发踩坑记"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+  </ul>
   
   
   <!-- Button trigger modal -->
@@ -470,6 +526,37 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+   
+
+
+
+
+   
+    
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine"></script>
+  <script type="text/javascript">
+  var GUEST = ['nick', 'mail', 'link'];
+  var meta = 'nick,mail,link';
+  meta = meta.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#vcomments',
+    verify: false,
+    notify: false,
+    appId: 'uTrg3StzEGfa6c4wRfoPKGmx-gzGzoHsz',
+    appKey: 'scKdgnyCQlOgX4Tj48qmaHbg',
+    placeholder: 'Write something~',
+    avatar: 'mm',
+    meta: meta,
+    pageSize: '10' || 10,
+    visitor: false
+  });
+  </script>
+
+     
 
 
 
